@@ -2,7 +2,10 @@
 
 @section('content')
     <h1>Posts</h1>
-    <a class="btn btn-success" href="{{route('admin.posts.create')}}">Crea nuovo post</a>
+    <div class="text-end">
+        <a class="btn btn-success" href="{{route('admin.posts.create')}}">Crea nuovo post</a>
+    </div>
+
     @if(session()->has('message'))
     <div class="alert alert-success mb-3 mt-3">
         {{ session()->get('message') }}

@@ -27,7 +27,7 @@
                       </div>
                       <div class="mb-3">
                         <label for="content" class="form-label">Content</label>
-                        <textarea class="form-control" id="content" name="content">{{old('content', $post->content)}}</textarea>
+                        <textarea rows="10" class="form-control" id="content" name="content">{{old('content', $post->content)}}</textarea>
                       </div>
                       <div class="d-flex">
                         <div class="media me-4">
