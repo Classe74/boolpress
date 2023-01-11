@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -39,6 +40,11 @@ class PostController extends Controller
         $data = $request->validated();
         $slug = Post::generateSlug($request->title);
         $data['slug'] = $slug;
+        if($request->hasFile('cover_image')){
+            $path = Storage::disk('public')->put('post_images', $request->cover_image);
+            $data['cover_image'] = $path;
+        }
+
         $new_post = Post::create($data);
         return redirect()->route('admin.posts.show', $new_post->slug);
     }
@@ -74,7 +80,14 @@ class PostController extends Controller
         $data = $request->validated();
         $slug = Post::generateSlug($request->title);
         $data['slug'] = $slug;
+        if($request->hasFile('cover_image')){
+            if ($post->cover_image) {
+                Storage::delete($post->cover_image);
+            }
 
+            $path = Storage::disk('public')->put('post_images', $request->cover_image);
+            $data['cover_image'] = $path;
+        }
         $post->update($data);
         return redirect()->route('admin.posts.index')->with('message', "$post->title updated successfully");
     }
