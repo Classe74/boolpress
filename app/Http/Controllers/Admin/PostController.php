@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 
 class PostController extends Controller
@@ -33,9 +34,13 @@ class PostController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      */
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        //
+        $data = $request->validated();
+        $slug = Post::generateSlug($request->title);
+        $data['slug'] = $slug;
+        $new_post = Post::create($data);
+        return redirect()->route('admin.posts.show', $new_post->slug);
     }
 
     /**
@@ -53,9 +58,9 @@ class PostController extends Controller
      *
      * @param  int  $id
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        return view('admin.posts.edit');
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
@@ -64,16 +69,21 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      */
-    public function update(Request $request, $id)
+    public function update(UpdatePostRequest $request, Post $post)
     {
-        //
+        $data = $request->validated();
+        $slug = Post::generateSlug($request->title);
+        $data['slug'] = $slug;
+
+        $post->update($data);
+        return redirect()->route('admin.posts.index')->with('message', "$post->title updated successfully");
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
+     *
      */
     public function destroy(Post $post)
     {
