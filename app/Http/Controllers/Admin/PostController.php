@@ -7,6 +7,7 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -16,7 +17,13 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        if(Auth::user()->isAdmin()){
+            $posts = Post::all();
+        } else {
+            $userId = Auth::id();
+            $posts = Post::where('user_id', $userId)->get();
+        }
+
 
         return view('admin.posts.index', compact('posts'));
     }
@@ -37,9 +44,11 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
+        $userId = Auth::id();
         $data = $request->validated();
         $slug = Post::generateSlug($request->title);
         $data['slug'] = $slug;
+        $data['user_id'] = $userId;
         if($request->hasFile('cover_image')){
             $path = Storage::disk('public')->put('post_images', $request->cover_image);
             $data['cover_image'] = $path;
@@ -56,6 +65,9 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+        if(!Auth::user()->isAdmin() && $post->user_id !== Auth::id()){
+            abort(403);
+        }
         return view('admin.posts.show', compact('post'));
     }
 
@@ -66,6 +78,9 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        if(!Auth::user()->isAdmin() && $post->user_id !== Auth::id()){
+            abort(403);
+        }
         return view('admin.posts.edit', compact('post'));
     }
 
@@ -77,6 +92,9 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
+        if(!Auth::user()->isAdmin() && $post->user_id !== Auth::id()){
+            abort(403);
+        }
         $data = $request->validated();
         $slug = Post::generateSlug($request->title);
         $data['slug'] = $slug;
@@ -100,6 +118,9 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        if(!Auth::user()->isAdmin() && $post->user_id !== Auth::id()){
+            abort(403);
+        }
         $post->delete();
         return redirect()->route('admin.posts.index')->with('message', "$post->title deleted successfully");
     }

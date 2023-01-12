@@ -10,21 +10,23 @@
                     <i class="fa-solid fa-newspaper fa-lg fa-fw"></i> Posts
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" href="#">
-                    <i class="fa-solid fa-folder-open fa-lg fa-fw"></i> Categories
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" href="#">
-                    <i class="fa-solid fa-bookmark fa-lg fa-fw"></i> Tags
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" href="#">
-                    <i class="fa-solid fa-users fa-lg fa-fw"></i> Users
-                </a>
-            </li>
+            @if(Auth::check() && Auth::user()->isAdmin())
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#">
+                        <i class="fa-solid fa-folder-open fa-lg fa-fw"></i> Categories
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#">
+                        <i class="fa-solid fa-bookmark fa-lg fa-fw"></i> Tags
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#">
+                        <i class="fa-solid fa-users fa-lg fa-fw"></i> Users
+                    </a>
+                </li>
+            @endif
         </ul>
     </nav>
 
