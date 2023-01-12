@@ -27,6 +27,7 @@ class UpdateCategoryRequest extends FormRequest
 
                 'name' => 'required|unique:categories|max:50|min:3',
 
+
         ];
     }
     public function messages(){
