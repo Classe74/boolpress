@@ -2,8 +2,12 @@
 
 @section('content')
 
-    <h1>{{$post->title}}</h1>
-    <p>{{$post->content}}</p>
-    <img width="300" src="{{ asset('storage/' . $post->cover_image) }}">
+    <h1>{{$category->name}}</h1>
+    <ul>
+        @foreach ($category->posts as $post)
+            <li>{{$post->title}}</li>
+        @endforeach
+    </ul>
+
 
 @endsection

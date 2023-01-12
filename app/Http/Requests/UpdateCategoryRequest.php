@@ -13,7 +13,7 @@ class UpdateCategoryRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,17 @@ class UpdateCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+
+                'name' => 'required|unique:categories|max:50|min:3',
+
+        ];
+    }
+    public function messages(){
+        return [
+            'name.required' => 'Il nome è obbligatorio.',
+            'name.min' => 'Il nome deve essere lungo almeno :min caratteri.',
+            'name.max' => 'Il nome non può superare i :max caratteri.',
+            'name.unique:categories' => 'Il nome esiste già'
         ];
     }
 }
