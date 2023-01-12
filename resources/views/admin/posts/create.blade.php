@@ -29,8 +29,9 @@
                         <textarea rows="10" class="form-control" id="content" name="content"></textarea>
                       </div>
                       <div class="mb-3">
-                        <label for="cover_image" class="form-label">Immagine</label>
-                        <input type="file" name="cover_image" id="cover_image" class="form-control  @error('cover_image') is-invalid @enderror" >
+                        <img id="uploadPreview" width="100" src="https://via.placeholder.com/300x200">
+                        <label for="create_cover_image" class="form-label">Immagine</label>
+                        <input type="file" name="cover_image" id="create_cover_image" class="form-control  @error('cover_image') is-invalid @enderror">
                         @error('cover_image')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
