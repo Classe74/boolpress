@@ -124,7 +124,10 @@ class PostController extends Controller
         if(!Auth::user()->isAdmin() && $post->user_id !== Auth::id()){
             abort(403);
         }
-        Storage::delete($post->cover_image);
+        if($post->cover_image){
+            Storage::delete($post->cover_image);
+        }
+
         $post->delete();
         return redirect()->route('admin.posts.index')->with('message', "$post->title deleted successfully");
     }
