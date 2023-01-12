@@ -52,7 +52,7 @@ class PostController extends Controller
         $data['slug'] = $slug;
         $data['user_id'] = $userId;
         if($request->hasFile('cover_image')){
-            $path = Storage::disk('public')->put('post_images', $request->cover_image);
+            $path = Storage::put('post_images', $request->cover_image);
             $data['cover_image'] = $path;
         }
 
@@ -124,6 +124,7 @@ class PostController extends Controller
         if(!Auth::user()->isAdmin() && $post->user_id !== Auth::id()){
             abort(403);
         }
+        Storage::delete($post->cover_image);
         $post->delete();
         return redirect()->route('admin.posts.index')->with('message', "$post->title deleted successfully");
     }
