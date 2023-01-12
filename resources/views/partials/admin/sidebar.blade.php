@@ -12,7 +12,7 @@
             </li>
             @if(Auth::check() && Auth::user()->isAdmin())
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="#">
+                    <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.categories.index' ? 'bg-secondary' : '' }}" href="{{route('admin.categories.index')}}">
                         <i class="fa-solid fa-folder-open fa-lg fa-fw"></i> Categories
                     </a>
                 </li>
