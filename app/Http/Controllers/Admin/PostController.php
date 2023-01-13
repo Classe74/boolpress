@@ -105,9 +105,12 @@ class PostController extends Controller
         if(!Auth::user()->isAdmin() && $post->user_id !== Auth::id()){
             abort(403);
         }
+
         $data = $request->validated();
+
         $slug = Post::generateSlug($request->title);
         $data['slug'] = $slug;
+
         if($request->hasFile('cover_image')){
             if ($post->cover_image) {
                 Storage::delete($post->cover_image);
@@ -120,6 +123,8 @@ class PostController extends Controller
 
         if($request->has('tags')){
             $post->tags()->sync($request->tags);
+        } else {
+            $post->tags()->sync([]);
         }
 
         return redirect()->route('admin.posts.index')->with('message', "$post->title updated successfully");

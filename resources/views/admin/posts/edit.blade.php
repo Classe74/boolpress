@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
- {{-- <div>
+ <div>
             @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -11,7 +11,7 @@
                 </ul>
             </div>
             @endif
-        </div> --}}
+        </div>
         <h1>Edit Post: {{$post->title}}</h1>
         <div class="row bg-white">
             <div class="col-12">
@@ -54,20 +54,34 @@
                         @enderror
                       </div>
                       <div class="mb-3">
-                        <label for="tags" class="form-label">Tags</label>
+                        @foreach ($tags as $tag)
+                        <div class="form-check form-check-inline">
+
+                            @if (old("tags"))
+                                <input type="checkbox" class="form-check-input" id="{{$tag->slug}}" name="tags[]" value="{{$tag->id}}" {{in_array( $tag->id, old("tags", []) ) ? 'checked' : ''}}>
+                            @else
+                                <input type="checkbox" class="form-check-input" id="{{$tag->slug}}" name="tags[]" value="{{$tag->id}}" {{$post->tags->contains($tag) ? 'checked' : ''}}>
+                            @endif
+                            <label class="form-check-label" for="{{$tag->slug}}">{{$tag->name}}</label>
+                        </div>
+                    @endforeach
+                    @error('tags')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                        {{-- <label for="tags" class="form-label">Tags</label>
                         <select multiple class="form-select" name="tags[]" id="tags">
                             <option value="">Seleziona tag</option>
                             @forelse ($tags as $tag)
-                            @if($errors->any())
-                            <option value="{{$tag->id}}" {{in_array($tag->id , old('tags[]')) ? 'selected': ''}}>{{$tag->name}}</option>
-                            @else
-                            <option value="{{$tag->id}}" {{$post->tags->contains($tag->id) ? 'selected': ''}}>{{$tag->name}}</option>
-                            @endif
+                                @if($errors->any())
+                                <option value="{{$tag->id}}" {{is_array(old('tags[]')) && in_array($tag->id , old('tags[]')) ? 'selected': ''}}>{{$tag->name}}</option>
+                                @else
+                                <option value="{{$tag->id}}" {{$post->tags->contains($tag->id) ? 'selected': ''}}>{{$tag->name}}</option>
+                                @endif
                             @empty
                                 <option value="">No tag</option>
                             @endforelse
 
-                        </select>
+                        </select> --}}
 
                       </div>
                       <button type="submit" class="btn btn-success">Submit</button>
