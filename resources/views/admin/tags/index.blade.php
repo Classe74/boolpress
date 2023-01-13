@@ -21,7 +21,6 @@
             <th scope="col">#</th>
             <th scope="col">Name</th>
             <th scope="col">Posts</th>
-            <th scope="col">Edit</th>
             <th scope="col">Delete</th>
         </tr>
         </thead>
@@ -39,7 +38,7 @@
                     </td>
 
                     <td>
-
+                        {{$tag->posts && count($tag->posts) > 0 ? count($tag->posts) : 0}}
                     </td>
                     <td>
                         <form action="{{route('admin.tags.destroy', $tag->slug)}}" method="POST">

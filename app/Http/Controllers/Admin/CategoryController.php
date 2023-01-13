@@ -50,17 +50,23 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
 
      */
-    public function show(Category $category)
-    {
-        return view('admin.categories.show', compact('category'));
-    }
-    // public function show($slug)
+    // public function show(Category $category)
     // {
-    //     $acategory = Category::where('slug',$slug)->first();
-    //     $category = $acategory->posts()->where('user_id', Auth::id())->get();
-    //    // Category::all();
     //     return view('admin.categories.show', compact('category'));
     // }
+    public function show($slug)
+    {
+        if(Auth::user()->isAdmin()){
+            $category = Category::where('slug', $slug)->first();
+        } else {
+            $category = Category::where('slug', $slug)->with([
+                'posts' => function ($query) {
+                    $query->where('user_id', Auth::id());
+                }
+            ])->first();
+        }
+        return view('admin.categories.show', compact('category'));
+    }
     /**
      * Show the form for editing the specified resource.
      *
