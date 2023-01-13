@@ -19,10 +19,10 @@ class PostController extends Controller
     public function index()
     {
         if(Auth::user()->isAdmin()){
-            $posts = Post::all();
+            $posts = Post::paginate(3);
         } else {
             $userId = Auth::id();
-            $posts = Post::where('user_id', $userId)->get();
+            $posts = Post::where('user_id', $userId)->paginate(3);
         }
 
 
@@ -106,7 +106,7 @@ class PostController extends Controller
                 Storage::delete($post->cover_image);
             }
 
-            $path = Storage::disk('public')->put('post_images', $request->cover_image);
+            $path = Storage::put('post_images', $request->cover_image);
             $data['cover_image'] = $path;
         }
         $post->update($data);

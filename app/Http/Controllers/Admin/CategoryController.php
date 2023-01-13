@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
-
+use Illuminate\Support\Facades\Auth;
 class CategoryController extends Controller
 {
     /**
@@ -54,7 +54,13 @@ class CategoryController extends Controller
     {
         return view('admin.categories.show', compact('category'));
     }
-
+    // public function show($slug)
+    // {
+    //     $acategory = Category::where('slug',$slug)->first();
+    //     $category = $acategory->posts()->where('user_id', Auth::id())->get();
+    //    // Category::all();
+    //     return view('admin.categories.show', compact('category'));
+    // }
     /**
      * Show the form for editing the specified resource.
      *
