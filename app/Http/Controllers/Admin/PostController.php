@@ -7,6 +7,7 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
@@ -36,7 +37,8 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('admin.posts.create', compact('categories'));
+        $tags = Tag::all();
+        return view('admin.posts.create', compact('categories','tags'));
     }
 
     /**
@@ -84,7 +86,8 @@ class PostController extends Controller
             abort(403);
         }
         $categories = Category::all();
-        return view('admin.posts.edit', compact('post','categories'));
+        $tags = Tag::all();
+        return view('admin.posts.edit', compact('post','categories','tags'));
     }
 
     /**

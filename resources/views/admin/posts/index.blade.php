@@ -18,6 +18,7 @@
             <th scope="col">Title</th>
             <th scope="col">Content</th>
             <th scope="col">Category</th>
+            <th scope="col">Tags</th>
             <th scope="col">Edit</th>
             <th scope="col">Delete</th>
         </tr>
@@ -29,6 +30,7 @@
                     <td><a href="{{route('admin.posts.show', $post->slug)}}" title="View Post">{{$post->title}}</a></td>
                     <td>{{Str::limit($post->content,100)}}</td>
                     <td>{{$post->category ? $post->category->name : 'Senza categoria'}}</td>
+                    <td>{{$post->tags && count($post->tags) > 0 ? count($post->tags) : 0}}</td>
                     <td><a class="link-secondary" href="{{route('admin.posts.edit', $post->slug)}}" title="Edit Post"><i class="fa-solid fa-pen"></i></a></td>
                     <td>
                         <form action="{{route('admin.posts.destroy', $post->slug)}}" method="POST">

@@ -26,13 +26,17 @@
                 <tr>
                     <th scope="row">{{$tag->id}}</th>
                     <td>
-                        {{$tag->name}}
+                        <form id="tag-{{$tag->id}}" action="{{route('admin.tags.update', $tag->slug)}}" method="post">
+                            @csrf
+                            @method('PATCH')
+                            <input class="border-0 bg-transparent" type="text" name="name" value="{{$tag->name}}">
+                        </form>
                         {{-- <a href="{{route('admin.categories.show', $tag->slug)}}" title="View Ctegory">{{$tag->name}}</a> --}}
                     </td>
 
                     {{-- <td>{{count($tag->posts) > 0 ? count($tag->posts)  : 0}}</td> --}}
                     <td>
-                        {{-- <a class="link-secondary" href="{{route('admin.tags.edit', $tag->slug)}}" title="Edit Category"><i class="fa-solid fa-pen"></i></a> --}}
+
                     </td>
                     <td>
                         <form action="{{route('admin.tags.destroy', $tag->slug)}}" method="POST">
