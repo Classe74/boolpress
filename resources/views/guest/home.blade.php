@@ -16,13 +16,10 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Usando Vite -->
-    @vite(['resources/js/app.js'])
+    @vite(['resources/js/front.js'])
 </head>
 
 <body>
-    <div id="app">
-
-
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
@@ -83,11 +80,7 @@
                 </div>
             </div>
         </nav>
-
-        <main class="">
-            @yield('content')
-        </main>
-    </div>
+        <div id="app"></div>
 </body>
 
 </html>
