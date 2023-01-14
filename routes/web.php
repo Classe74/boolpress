@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('guest.home');
 });
-
+// clear
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
@@ -43,6 +43,6 @@ Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')
 
 require __DIR__.'/auth.php';
 
-// Route::get('{any?}', function () {
-//        return view('guest.home');
-// })->where('any', '.*');
+Route::get('{any?}', function () {
+       return view('guest.home');
+})->where('any', '.*');
