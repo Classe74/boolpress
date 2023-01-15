@@ -52,6 +52,8 @@ class CategoryController extends Controller
      */
     // public function show(Category $category)
     // {
+
+    //     dd($category);
     //     return view('admin.categories.show', compact('category'));
     // }
     public function show($slug)
