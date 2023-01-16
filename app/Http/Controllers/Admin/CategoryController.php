@@ -67,6 +67,7 @@ class CategoryController extends Controller
                 }
             ])->first();
         }
+       //dd($category);
         return view('admin.categories.show', compact('category'));
     }
     /**

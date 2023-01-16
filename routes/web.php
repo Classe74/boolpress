@@ -18,9 +18,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('guest.home');
-});
+// Route::get('/', function () {
+//     return view('guest.home');
+// });
 // clear
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
@@ -43,6 +43,14 @@ Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')
 
 require __DIR__.'/auth.php';
 
+//es. che riporta sempre alla home
+//Route::get('{any?}', function () {
+//        return view('guest.home');
+// })->where('any', '.*');
+
+// altro es. Route::get('{any?}', [HomeController::class, 'index'])->where('any', '.*')->name('home');
+
+// con qusta riporta sempre alla login
 Route::get('{any?}', function () {
-       return view('guest.home');
+    return redirect()->route('admin.dashboard');
 })->where('any', '.*');

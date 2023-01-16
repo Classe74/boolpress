@@ -68,21 +68,6 @@
                     @error('tags')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
-                        {{-- <label for="tags" class="form-label">Tags</label>
-                        <select multiple class="form-select" name="tags[]" id="tags">
-                            <option value="">Seleziona tag</option>
-                            @forelse ($tags as $tag)
-                                @if($errors->any())
-                                <option value="{{$tag->id}}" {{is_array(old('tags[]')) && in_array($tag->id , old('tags[]')) ? 'selected': ''}}>{{$tag->name}}</option>
-                                @else
-                                <option value="{{$tag->id}}" {{$post->tags->contains($tag->id) ? 'selected': ''}}>{{$tag->name}}</option>
-                                @endif
-                            @empty
-                                <option value="">No tag</option>
-                            @endforelse
-
-                        </select> --}}
-
                       </div>
                       <button type="submit" class="btn btn-success">Submit</button>
                       <button type="reset" class="btn btn-primary">Reset</button>
