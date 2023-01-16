@@ -50,7 +50,11 @@ require __DIR__.'/auth.php';
 
 // altro es. Route::get('{any?}', [HomeController::class, 'index'])->where('any', '.*')->name('home');
 
-// con qusta riporta sempre alla login
-Route::get('{any?}', function () {
+// con questa riporta sempre alla login
+// Route::get('{any?}', function () {
+//     return redirect()->route('admin.dashboard');
+// })->where('any', '.*');
+
+Route::fallback(function() {
     return redirect()->route('admin.dashboard');
-})->where('any', '.*');
+});
