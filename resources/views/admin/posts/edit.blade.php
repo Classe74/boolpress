@@ -54,7 +54,6 @@
                         @enderror
                       </div>
                       <div class="mb-3">
-                        <h5>Select Tags</h5>
                         @foreach ($tags as $tag)
                         <div class="form-check form-check-inline">
 
