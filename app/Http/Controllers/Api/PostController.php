@@ -10,7 +10,7 @@ class PostController extends Controller
 {
     public function index()
 {
-    $posts = Post::with('category','tags')->paginate(3);
+    $posts = Post::with('category','tags')->paginate(3); //altrimenti ->get()
     return response()->json([
         'success' => true,
         'results' => $posts
