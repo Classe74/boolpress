@@ -26,13 +26,13 @@ use Illuminate\Support\Facades\Route;
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')
-   ->group(function () {
-         Route::get('/', [DashboardController::class, 'index'])
-         ->name('dashboard');
+    ->group(function () {
+        Route::get('/', [DashboardController::class, 'index'])
+            ->name('dashboard');
         Route::resource('posts', PostController::class)->parameters(['posts' => 'post:slug']);
         Route::resource('categories', CategoryController::class)->parameters(['categories' => 'category:slug']);
-        Route::resource('tags', TagController::class)->parameters(['tags' => 'tag:slug'])->except('show','create','edit');
-   });
+        Route::resource('tags', TagController::class)->parameters(['tags' => 'tag:slug'])->except('show', 'create', 'edit');
+    });
 
 
 // Route::middleware('auth')->group(function () {
@@ -41,7 +41,7 @@ Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')
 //     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 // });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 //es. che riporta sempre alla home
 //Route::get('{any?}', function () {
@@ -55,6 +55,6 @@ require __DIR__.'/auth.php';
 //     return redirect()->route('admin.dashboard');
 // })->where('any', '.*');
 
-Route::fallback(function() {
+Route::fallback(function () {
     return redirect()->route('admin.dashboard');
 });
