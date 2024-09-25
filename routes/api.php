@@ -24,5 +24,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('posts', [PostController::class, 'index']);
 Route::get('posts/{slug}', [PostController::class, 'show']);
 
-
 Route::post('/contacts', [LeadController::class, 'store']);
