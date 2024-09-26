@@ -12,9 +12,6 @@
             return {
                 'title': 'Hello Vue in Laravel'
             }
-        },
-        mounted(){
-
         }
     }
 </script>

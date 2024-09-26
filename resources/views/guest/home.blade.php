@@ -58,12 +58,12 @@
                         </li>
                         @endif
                         @else
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link" href="{{ url('admin') }}">
                                 {{ Auth::user()->name }}
                             </a>
-                        </li>
-                        {{-- <li class="nav-item dropdown">
+                        </li> --}}
+                        <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}
                             </a>
@@ -79,7 +79,7 @@
                                     @csrf
                                 </form>
                             </div>
-                        </li> --}}
+                        </li>
                         </div>
                         @endguest
                     </ul>
