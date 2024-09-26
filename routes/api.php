@@ -25,3 +25,4 @@ Route::get('posts', [PostController::class, 'index']);
 Route::get('posts/{slug}', [PostController::class, 'show']);
 
 Route::post('/contacts', [LeadController::class, 'store']);
+
